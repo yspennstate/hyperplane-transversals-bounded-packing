@@ -16,5 +16,5 @@ excess over nu/d, taken over all nu, is (1+o(1)) log2 d.
 ## Layout
 
 - `paper/main.tex`, `paper/main.pdf` - the paper (built with tectonic).
-- `CREDITS.md` - which earlier result is used where, with the theorem numbers checked against each source.
+- `CREDITS.md` - which earlier result is used where.
 - `SHA256SUMS` - checksums of the files above.
