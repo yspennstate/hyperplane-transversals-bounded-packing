@@ -1,0 +1,453 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{enumerate}
+\usepackage{booktabs,array}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:\nolinkurl{#1}}}
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\F}{\mathcal F}
+\newcommand{\G}{\mathcal G}
+\newcommand{\ceil}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+\setlength{\emergencystretch}{2.5em}
+
+\begin{document}
+
+\title{Hyperplane transversals of families with bounded packing number}
+\author{Yitzchak Shmalo}
+\date{25 November 2026}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yspennstate@gmail.com}
+\subjclass[2020]{52A35, 52C35, 05D15}
+\keywords{hyperplane transversal, piercing number, $(p,2)$ property, packing number, Dol'nikov's theorem}
+
+\begin{abstract}\label{abs:start}
+McGinnis and Zerbib asked whether a finite family of compact convex sets in $\R^d$ with the $(p,2)$ property is pierced
+by $p/d+O(1)$ hyperplanes. We show that a finite family of compact convex sets in
+$\R^d$, $d\ge2$, whose largest subfamily of pairwise disjoint sets has $\nu$ members is pierced by
+$\ceil{\nu/d}+2\ceil{\log_2 d}+3$ hyperplanes, and also by $\floor{\nu/d}+2d-2$ hyperplanes, which answers the
+question in the affirmative when the constant is allowed to depend on $d$. Points on the moment curve show that the coefficient $1/d$ cannot be lowered. The additive term cannot be bounded
+independently of $d$: hulls of the $s$-element subsets of points on the moment curve show that $\ceil{\log_2(\nu+1)}$
+hyperplanes are sometimes needed, and this is the exact worst case when $d\ge 2^{\ceil{\log_2(\nu+1)}-1}$. The largest
+excess over $\nu/d$, taken over all $\nu$, is $(1+o(1))\log_2 d$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $\F$ be a finite family of nonempty compact convex sets in $\R^d$. Its \emph{packing number} $\nu(\F)$ is the
+largest number of pairwise disjoint members of $\F$, and its \emph{hyperplane transversal number} $\tau(\F)$ is the
+least number of affine hyperplanes whose union meets every member of $\F$. A family has the $(p,q)$ property if among
+any $p$ of its members some $q$ have a common point; the $(p,2)$ property says exactly that $\nu(\F)\le p-1$. For
+$d\ge2$ and $n\ge1$ let $T(d,n)$ be the largest value of $\tau(\F)$ over such families with $\nu(\F)\le n$.
+
+Hyperplane transversals of families with a $(p,q)$ property go back to Alon and Kalai~\cite{AK95}, who proved that for
+$p\ge q\ge d+1$ a family of compact convex sets in which some $q$ of every $p$ members have a common hyperplane
+transversal is pierced by a number of hyperplanes that depends only on $p$, $q$ and $d$. For the $(p,2)$ property, projecting onto a line and
+applying Gallai's theorem on intervals~\cite{Gal59} (see \cite[Theorem~1.6]{Zer24}) gives $T(d,n)\le n$. Zerbib~\cite[Theorem~1.2]{Zer24} used the KKM theorem
+to prove that a finite family of compact convex sets in the plane with the $(p+1,2)$ property is pierced by
+$\floor{p/2}+1$ lines, which is tight; this planar bound is a special case of a conjecture of McGinnis~\cite{McG24}. McGinnis and
+Zerbib~\cite[Theorem~3.15]{MZ24} state the same bound $\floor{p/2}+1$ for hyperplanes in every dimension $d\ge2$, which
+follows from the planar case by projecting onto a $2$-plane, since disjoint projections come from disjoint sets, and
+ask~\cite[Question~3.16]{MZ24}:
+
+\begin{quote}
+Is it true that a finite family of compact convex sets in $\R^d$ with the $(p,2)$ property is pierced by $p/d+O(1)$
+hyperplanes?
+\end{quote}
+
+Frick, Murray, Simon and Stemmler~\cite[Theorem~1.7]{FMSS24} proved that a family of polytopes in $\R^3$ with the
+$(8,2)$ property is pierced by three planes. More generally they proved
+that if no $2^k$ members of a finite family of polytopes in $\R^{2^{k-1}}$ are pairwise disjoint, then $k$ hyperplanes
+pierce it; this is the case $m=1$ of~\cite[Theorem~1.5]{FMSS24}. Their methods are equivariant-topological and give the
+right count when the number of hyperplanes is fixed and the dimension grows; they do not give a bound of the form
+$\nu/d+O(1)$ in a fixed dimension.
+
+If the implied constant is allowed to depend on $d$, Theorem~\ref{thm:upper} answers the question in the affirmative.
+A constant independent of $d$ is impossible: by Theorem~\ref{thm:loss} the least admissible constant grows like
+$\log_2 d$.
+
+\begin{theorem}\label{thm:upper}
+Let $d\ge2$, and let $\F$ be a finite family of nonempty compact convex sets in $\R^d$ with $\nu(\F)=\nu\ge1$. Then
+\[
+\tau(\F)\le \min\Bigl\{\Bigl\lceil\frac{\nu}{d}\Bigr\rceil+2\ceil{\log_2 d}+3,\ \Bigl\lfloor\frac{\nu}{d}\Bigr\rfloor+2d-2\Bigr\}.
+\]
+\end{theorem}
+
+The second bound is the smaller one for $d\le5$ and the first for $d\ge7$; for $d=6$ the first is smaller when $6$
+divides $\nu$, and the two agree otherwise. In dimension two Zerbib's bound is stronger. In
+dimension three Theorem~\ref{thm:upper} improves on $\floor{\nu/2}+1$ for every $\nu\ge22$, and in each dimension from
+$3$ to $10$ it does so for every $\nu\ge30$.
+
+\begin{theorem}\label{thm:lower}
+For all $d\ge2$ and $n\ge1$,
+\[
+T(d,n)\ \ge\ \max\Bigl\{\Bigl\lceil\frac nd\Bigr\rceil,\ \ceil{\log_2(n+1)}\Bigr\}.
+\]
+If $d\ge 2^{\ceil{\log_2(n+1)}-1}$, then $T(d,n)=\ceil{\log_2(n+1)}$.
+\end{theorem}
+
+For polytopes and $d=2^{k-1}$ the upper bound in the last sentence is the case $m=1$ of~\cite[Theorem~1.5]{FMSS24}
+quoted above. Together, Theorems~\ref{thm:upper} and~\ref{thm:lower} give $T(d,n)/n\to1/d$ as $n\to\infty$ for each
+fixed $d$, and show that no additive constant independent of $d$ is possible: $T(d,d)\ge\ceil{\log_2(d+1)}$, while
+$d/d=1$. The size of the additive term is determined up to lower-order terms.
+
+\begin{theorem}\label{thm:loss}
+For $d\ge2$ let $A(d)=\sup_{n\ge1}\bigl(T(d,n)-n/d\bigr)$, and put $\ell=\ceil{\log_2 d}$ (fixed with this meaning
+throughout) and $j=\ceil{\log_2(8\ell+16)}$. Then
+\[
+\ceil{\log_2(d+1)}-1\ \le\ A(d)\ \le\ \ell+2j+1,
+\]
+and in particular $A(d)/\log_2 d\to1$ as $d\to\infty$.
+\end{theorem}
+
+The proofs are elementary apart from one topological input. Two cutting operations are used. The first
+(Lemma~\ref{lem:onecut}) splits one family, by one hyperplane, into two subfamilies with prescribed packing numbers
+$a$ and $n-a-1$. The second (Lemma~\ref{lem:simul}) halves the packing numbers of up to $d$ families at once, provided
+each of them is odd; it applies Dol'nikov's transversal theorem~\cite{Dol92} to the convex hulls of the large packings
+of each family, the device by which Frick, Murray, Simon and Stemmler~\cite[Section~1]{FMSS24} relate transversals to
+equipartitions. Halving repeatedly produces a binary tree of subfamilies. The point of Section~\ref{sec:schedule} is
+that the nodes of such a tree can be scheduled breadth first, $d$ at a time, at a cost of only $\ceil{\log_2 d}$ extra
+hyperplanes, and Section~\ref{sec:proof} pads an arbitrary packing number into such trees without losing a hyperplane
+at each binary digit. For completeness, Section~\ref{sec:cuts} includes the projection proof of the transversal theorem
+from the Borsuk--Ulam theorem~\cite{Bor33}.
+
+The same bounds hold for compact connected sets, and for hyperplanes whose normals are restricted to a linear subspace
+(Remark~\ref{rem:connected}). The paper is organized as follows; the symbols are listed in Appendix~\ref{app:notation}.
+
+\begin{center}
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+Section & Contents \\
+\midrule
+\ref{sec:cuts} & lists and capacities; one cut (Lemma~\ref{lem:onecut}); Dol'nikov's theorem and simultaneous halving
+(Lemma~\ref{lem:simul}) \\
+\ref{sec:schedule} & breadth-first scheduling of a tree of halvings (Lemma~\ref{lem:schedule}) \\
+\ref{sec:proof} & proof of Theorem~\ref{thm:upper} \\
+\ref{sec:lower} & constructions on the moment curve; proof of Theorem~\ref{thm:lower} \\
+\ref{sec:loss} & proof of Theorem~\ref{thm:loss} \\
+\ref{sec:remarks} & connected sets, restricted normals, open questions \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Two ways to cut a family}\label{sec:cuts}
+
+A \emph{list} is a finite family of nonempty compact convex sets, possibly empty and possibly with repetitions; lists
+are disjoint as lists even when their sets meet in space. A nonnegative integer $b$ is a \emph{capacity} for a list
+$\G$ if $\nu(\G)\le b$ (with $\nu(\emptyset)=0$). If $b$ and $c$ are capacities for $\G$ and $\G'$, then $b+c$ is a
+capacity for the concatenation of $\G$ and $\G'$, since a family of pairwise disjoint members splits into its parts in
+$\G$ and in $\G'$. We say that a hyperplane $H$ \emph{processes} a list $\G$ into lists $\G^-$ and $\G^+$ if every
+member of $\G$ that misses $H$ lies in exactly one of $\G^-$, $\G^+$; the members meeting $H$ are discarded.
+
+\begin{lemma}\label{lem:onecut}
+Let $n\ge1$ be a capacity for $\G$ and let $0\le a<n$. There is a hyperplane that processes $\G$ into lists with
+capacities $a$ and $n-a-1$.
+\end{lemma}
+
+\begin{proof}
+Fix a unit vector $u$. If $\G$ has no $a+1$ pairwise disjoint members, put every member missing an arbitrary
+hyperplane in $\G^-$. Otherwise, for each family $P$ of $a+1$ pairwise disjoint members of $\G$ let
+$m(P)=\max\{\langle u,x\rangle: x\in\bigcup P\}$, which exists by compactness, and let $t$ be the least of these finitely
+many values, attained by $P_0$. Let $H=\{x:\langle u,x\rangle=t\}$. A member missing $H$ is contained in one of the two
+open half-spaces, being convex; put those below $H$ in $\G^-$ and those above in $\G^+$. A family of $a+1$ pairwise
+disjoint members of $\G^-$ would have $m(P)<t$, so $a$ is a capacity for $\G^-$. Every member of $\G^+$ lies above $H$,
+and every member of $P_0$ lies in the closed half-space below $H$, so the members of $\G^+$ are disjoint from those of
+$P_0$. Hence a family of pairwise disjoint members of $\G^+$ together with $P_0$ is pairwise disjoint in $\G$, and
+$n-a-1$ is a capacity for $\G^+$.
+\end{proof}
+
+We use Dol'nikov's theorem in the following form; a family is \emph{intersecting} if any two of its members meet.
+
+\begin{theorem}[Dol'nikov~\cite{Dol92}; see also {\cite[Theorem~1.2]{FMSS24}}]\label{thm:dol}
+Let $\G_1,\dots,\G_k$, $k\le d$, be finite nonempty intersecting families of nonempty compact convex sets in $\R^d$. Then some
+hyperplane meets every member of every $\G_i$.
+\end{theorem}
+
+\begin{proof}
+For a unit vector $u$, the sets $\{\langle u,x\rangle:x\in C\}$, $C\in\G_i$, are pairwise intersecting closed
+intervals, so they have the common interval $[\alpha_i(u),\beta_i(u)]$, where $\alpha_i$ is the largest left endpoint and
+$\beta_i$ the smallest right endpoint. Both are continuous in $u$, since the families are finite and the support
+function of a compact set is continuous. The midpoint $\mu_i=(\alpha_i+\beta_i)/2$ satisfies $\mu_i(-u)=-\mu_i(u)$.
+The map $S^{d-1}\to\R^{d-1}$ whose first $k-1$ coordinates are $\mu_i(u)-\mu_1(u)$, $2\le i\le k$, and whose other
+coordinates are zero is continuous and odd, so by the Borsuk--Ulam theorem~\cite{Bor33} it vanishes at some $u$. Then
+$t=\mu_1(u)$ lies in every common interval, and $\{x:\langle u,x\rangle=t\}$ meets every member of every $\G_i$.
+\end{proof}
+
+\begin{lemma}\label{lem:simul}
+Let $k\le d$, and let $2b_i+1$ be a capacity for the list $\G_i$, $1\le i\le k$. There is a hyperplane that processes
+each $\G_i$ into two lists with capacity $b_i$ each.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal K_i$ be the family of convex hulls $\operatorname{conv}\bigcup P$, where $P$ runs over the families of
+$b_i+1$ pairwise disjoint members of $\G_i$. These hulls are compact and convex. Two of them meet: if
+$\operatorname{conv}\bigcup P$ and $\operatorname{conv}\bigcup P'$ were disjoint, then so would be every member of $P$
+and every member of $P'$, and $P\cup P'$ would be $2b_i+2$ pairwise disjoint members of $\G_i$. Apply
+Theorem~\ref{thm:dol} to the nonempty families among $\mathcal K_1,\dots,\mathcal K_k$, and process each $\G_i$ by the
+resulting hyperplane $H$ into the members below and above it. If $b_i+1$ pairwise disjoint members of $\G_i$ were on
+the same open side of $H$, their hull would lie on that side and miss $H$. So $b_i$ is a capacity for both parts. (If
+$\mathcal K_i$ is empty, $b_i$ is a capacity for $\G_i$ itself and there is nothing to prove.)
+\end{proof}
+
+For $b_i=0$, Lemma~\ref{lem:simul} gives a hyperplane meeting every member of $\G_i$: an intersecting list is pierced.
+
+\section{Scheduling a binary tree}\label{sec:schedule}
+
+A list with capacity $2^k-1$ is split by Lemma~\ref{lem:simul} into two lists with capacity $2^{k-1}-1$, and in
+general into $2^r$ lists with capacity $2^{k-r}-1$ after $r$ rounds of splitting; at $r=k-1$ the lists have capacity
+$1$, and the operations of the next level pierce them. We call one application of
+Lemma~\ref{lem:simul} to one list an \emph{operation}; the operations form the \emph{perfect tree} of height $k$, with
+$2^k-1$ nodes. We also use the \emph{truncated} tree, which stops before the last level: it has $2^{k-1}-1$ operations
+and leaves $2^{k-1}$ lists with capacity $1$. A node is \emph{ready} once its parent has been performed.
+
+By Lemma~\ref{lem:simul}, one hyperplane performs any $d$ ready operations at once, whatever their capacities and
+wherever the lists lie in space. Members of other lists that the hyperplane happens to meet may be discarded or kept;
+either way every capacity remains valid, since removing members of a list does not increase its packing number. Thus
+the total count is governed by how many operations can be performed in parallel.
+
+\begin{lemma}\label{lem:schedule}
+A perfect or truncated tree with $s$ operations can be performed with at most $\ceil{s/d}+\ceil{\log_2 d}$ hyperplanes.
+\end{lemma}
+
+\begin{proof}
+Number the nodes $1,2,\dots,s$ in breadth-first order, so that the parent of node $i\ge2$
+is node $\floor{i/2}$. Perform the first $\ell$ levels one level per hyperplane, stopping if the tree ends; level $r$
+has $2^{r-1}\le 2^{\ell-1}<d$ nodes, and these $\ell$ levels contain the nodes $1,\dots,2^\ell-1$. Split the remaining
+nodes $2^\ell,\dots,s$ into consecutive batches of $d$ nodes, the last possibly smaller, and perform one batch per
+hyperplane in order. If a batch starts at node $i$, then $i\ge2^\ell\ge d$, and the parent of its last node is at most
+$\floor{(i+d-1)/2}<i$; so every node of the batch is ready when the batch is performed. The batches number at most
+$\ceil{(s-2^\ell+1)/d}\le\ceil{s/d}$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:upper}}\label{sec:proof}
+
+Write $n=\nu$. Several lists will be processed in sequence; at every stage every member of
+$\F$ is either already met by a chosen hyperplane or lies in a current list, and every current list has a capacity.
+When all current lists have capacity $0$ they are empty and $\F$ is pierced.
+
+\subsection*{The first bound}
+If $n=2^k-1$, Lemma~\ref{lem:schedule} applied to the perfect tree gives $\tau(\F)\le\ceil{n/d}+\ell$. Otherwise let
+$2^k\le n<2^{k+1}-1$, so $k\ge1$, and put
+\[
+M=2^k-1,\qquad L=2^{k-1},\qquad a=n-2^k,
+\]
+so that $0\le a\le M-1$ and $n=M+a+1$. By Lemma~\ref{lem:onecut} one hyperplane processes $\F$ into a list with
+capacity $M$ and a list with capacity $a$.
+
+On the first list perform the truncated tree of height $k$: it has $M-L$ operations and leaves $L$ lists with capacity
+$1$. Let $B$ be the least number of the form $2^r-1$, $r\ge0$, with $B\ge a$, and $t=B-a$. If $a=0$ then $B=t=0$.
+Otherwise $(B-1)/2<a$, that is $a\ge(B+1)/2$, so $t\le(B-1)/2$; and $B\le M$ because $a<M$, so $t\le(M-1)/2=L-1$.
+Concatenate $t$ of the $L$ lists of capacity $1$ with the list of capacity $a$; the result has capacity $a+t=B$, and we
+perform its perfect tree, which has $B$ operations. The remaining $L-t$ lists of capacity $1$ are pierced $d$ at a time
+by Lemma~\ref{lem:simul} with all $b_i=0$. By Lemma~\ref{lem:schedule} the number of hyperplanes is at most
+\begin{align*}
+1+\Bigl(\Bigl\lceil\frac{M-L}d\Bigr\rceil+\ell\Bigr)+\Bigl(\Bigl\lceil\frac Bd\Bigr\rceil+\ell\Bigr)+\Bigl\lceil\frac{L-t}d\Bigr\rceil
+&\le 3+2\ell+\Bigl\lceil\frac{(M-L)+B+(L-t)}d\Bigr\rceil\\
+&=3+2\ell+\Bigl\lceil\frac{n-1}d\Bigr\rceil,
+\end{align*}
+using $\ceil x+\ceil y+\ceil z\le\ceil{x+y+z}+2$ and $M+B-t=M+a=n-1$. This is at most $\ceil{n/d}+2\ell+3$.
+
+\subsection*{The second bound}
+Let $m=\floor{n/d}$. If $m=0$, then $n<d$, and $n$ applications of Lemma~\ref{lem:onecut} with $a=0$ reduce the
+capacity of $\F$ to $0$; so $\tau(\F)\le n\le 2d-2$. Let $m\ge1$. Apply Lemma~\ref{lem:onecut} $d-1$ times, each time to
+the current remainder, splitting off a list with capacity $m$; if the remainder already has capacity $m$ it is taken as
+the next list, and empty lists fill the rest. Each split lowers the capacity of the remainder by $m+1$, and
+$n-(d-1)(m+1)\le d(m+1)-1-(d-1)(m+1)=m$. So $d-1$ hyperplanes produce $d$ lists $\G_1,\dots,\G_d$, each with capacity
+$m$.
+
+If $m=2^k-1$, perform the perfect trees of all $\G_i$ simultaneously: one hyperplane performs the same node in all
+$d$ trees by Lemma~\ref{lem:simul}. This uses $m$ hyperplanes. Otherwise apply the construction of the first bound to
+each $\G_i$ with $m$ in place of $n$. Its quantities $M,L,a,B,t$ depend only on $m$, so after the $d$ separate cuts of
+Lemma~\ref{lem:onecut} the remaining operations have the same shape in every $\G_i$: a truncated tree, a perfect tree
+and $L-t$ piercings. Perform each operation in all $d$ copies with one hyperplane. The number of hyperplanes is
+$(M-L)+B+(L-t)=m-1$. In all cases
+\[
+\tau(\F)\le (d-1)+d+(m-1)=\floor{n/d}+2d-2.
+\]
+This proves Theorem~\ref{thm:upper}.\qed
+
+\section{Lower bounds}\label{sec:lower}
+
+The moment curve $\gamma(\lambda)=(\lambda,\lambda^2,\dots,\lambda^d)$ meets every hyperplane in at most $d$ points, since
+$\{\lambda:\langle u,\gamma(\lambda)\rangle=c\}$ is the zero set of a nonzero polynomial of degree at most $d$. Its points are in
+convex position.
+
+\begin{proof}[Proof of Theorem~\ref{thm:lower}]
+For the first bound take $n$ distinct points on the moment curve as singletons. They are pairwise disjoint and a
+hyperplane meets at most $d$ of them.
+
+For the second let $k=\ceil{\log_2(n+1)}-1$, so that $2^k\le n$. Choose an integer $s>kd+1$ and points
+$x_1,\dots,x_N$ on the moment curve with increasing parameters, where $N=(n+1)s-1$, and let $\F$ be the family of
+convex hulls of all $s$-element subsets of $\{x_1,\dots,x_N\}$. The points are in convex position, so each hull meets
+$\{x_1,\dots,x_N\}$ exactly in the $s$ points it is the hull of, and disjoint hulls come from disjoint sets of points; hence $\nu(\F)\le n$.
+The hulls of the $n$ consecutive blocks $\{x_{(r-1)s+1},\dots,x_{rs}\}$, $1\le r\le n$, are pairwise disjoint because
+their projections to the first coordinate are, so $\nu(\F)=n$. Suppose $k$ hyperplanes $H_1,\dots,H_k$ meet every
+member of $\F$. At most $kd$ of the points lie on $\bigcup H_r$. The others are distributed among the at most $2^k$
+sign classes $\{x:\operatorname{sign}(\langle u_r,x\rangle-c_r)=\epsilon_r,\ 1\le r\le k\}$, $\epsilon\in\{\pm1\}^k$,
+each of which is convex. A sign class containing $s$ of the points would contain the hull of those $s$ points, which
+then misses every $H_r$. So
+\[
+N\le kd+2^k(s-1)\le kd+n(s-1),
+\]
+whereas $N-n(s-1)=s+n-1>kd$. Hence $\tau(\F)\ge k+1=\ceil{\log_2(n+1)}$.
+
+For the equality, let $h=\ceil{\log_2(n+1)}$ and suppose $d\ge2^{h-1}$. Then $2^h-1\ge n$ is a capacity for $\F$, and
+the perfect tree of height $h$ has $2^{r-1}\le d$ nodes on level $r$. Performing one level per hyperplane by
+Lemma~\ref{lem:simul} pierces $\F$ with $h$ hyperplanes.
+\end{proof}
+
+\section{The dependence on the dimension}\label{sec:loss}
+
+\begin{proof}[Proof of Theorem~\ref{thm:loss}]
+The lower bound is $A(d)\ge T(d,d)-1\ge\ceil{\log_2(d+1)}-1$ by Theorem~\ref{thm:lower}. For the upper bound let
+$j=\ceil{\log_2(8\ell+16)}$ as in the theorem, and let $R$ be the least power of two with $R\ge d(2\ell+4)$. We call
+a round \emph{full} if its hyperplane performs $d$ operations. Let $\F$ have $\nu(\F)=n$.
+
+\emph{Large $n$.} Suppose $n\ge2R$. One hyperplane splits off, by Lemma~\ref{lem:onecut}, a list of capacity $2R-1$, leaving
+a list of capacity $Q=n-2R$. The truncated tree of the first list has $R-1$ operations; by Lemma~\ref{lem:schedule} it
+costs at most $(R-1)/d+\ell+1$ hyperplanes and leaves a reserve of $R$ lists of capacity $1$. Now run the construction
+of Section~\ref{sec:proof} on the list of capacity $Q$: nothing if $Q=0$, one perfect tree if $Q=2^k-1$, and otherwise one
+cut by Lemma~\ref{lem:onecut} followed by a truncated tree, a perfect tree and a set of piercings, with at most $Q$
+operations in all. Scheduled as in Lemma~\ref{lem:schedule}, a tree with $s$ operations uses at most $\ceil{s/d}+\ell$
+rounds and so leaves fewer than $d(\ell+1)$ idle positions in its rounds; the piercings leave fewer than $d$. In all,
+fewer than $d(2\ell+3)\le R$ positions are idle, and we fill each of them with the piercing of a reserve list, which
+Lemma~\ref{lem:simul} allows in the same round. Every round of this stage is then full except possibly one, made of the
+reserve lists left over, so this stage uses at most $(Q+R)/d+1$ rounds, besides at most one cut. The total is at most
+\[
+1+\frac{R-1}d+\ell+1+\frac{Q+R}d+2=\frac{n-1}d+\ell+4 .
+\]
+
+\emph{Small $n$.} Suppose $n<2R$. Since $R<2d(2\ell+4)$, we have $n+1\le d(8\ell+16)\le2^{\ell+j}$. While the current
+remainder has capacity $b>d$, split off by Lemma~\ref{lem:onecut} a list of capacity $2^r-1$, where $2^r\le b<2^{r+1}$;
+the new remainder has capacity $b-2^r<b/2$. Since $n<d\,2^j$, there are at most $j$ such cuts. Round the final capacity
+$b\le d$ up to the least $B=2^r-1\ge b$; then $B-b\le b\le d$. We now have a forest of perfect trees, with
+$W\le n+d$ operations in all, since each cut removes one unit of capacity more than its tree has operations. Each tree
+has height at most $\ceil{\log_2(n+1)}\le\ell+j$. In each round perform $d$ ready roots if there are at least $d$, and
+all of them otherwise. A full round performs $d$ operations, and a round that is not full performs every current root,
+so it lowers the largest remaining height by one; no round raises it. Hence there are at most $W/d+\ell+j$ rounds, and
+\[
+\tau(\F)\le j+\frac{n+d}d+\ell+j=\frac nd+\ell+2j+1 .
+\]
+
+Both cases give $T(d,n)-n/d\le\ell+2j+1$, since $j\ge5$. Finally $j=O(\log\log d)$ and $\ell/\log_2 d\to1$.
+\end{proof}
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{remark}\label{rem:connected}
+The bounds of Theorems~\ref{thm:upper} and~\ref{thm:loss} hold for finite families of nonempty compact connected sets,
+and also when the normals of the hyperplanes must lie in a given linear subspace $E$ of dimension $e\ge2$, with $e$ in
+place of $d$. Let $\pi$ be the orthogonal projection onto $E$ and replace each set $C$ by $\hat C=\operatorname{conv}\pi(C)$,
+a compact convex subset of $E$. For $u\in E$ we have $\langle u,\pi(x)\rangle=\langle u,x\rangle$, and $\langle u,C\rangle$
+is an interval because $C$ is connected; so $\langle u,\hat C\rangle=\langle u,C\rangle$. Hence a hyperplane of $E$ with
+normal $u$ meets $\hat C$ if and only if the hyperplane of $\R^d$ with the same equation meets $C$, and disjoint sets
+$\hat C$ come from disjoint sets $C$, so $\nu$ does not increase. The moment curve in $E$ gives the lower bounds of
+Theorem~\ref{thm:lower} with $e$ in place of $d$. For $e=1$ all hyperplanes are parallel, and the greedy choice of right
+endpoints shows that $\nu$ of them suffice, and $\nu$ sets with pairwise disjoint projections show that $\nu$ are
+needed.
+\end{remark}
+
+\begin{remark}
+The problem of the best additive constant in a fixed dimension remains open. For $d=3$ the bounds give
+$\max\{\ceil{n/3},\ceil{\log_2(n+1)}\}\le T(3,n)\le\floor{n/3}+4$ for $n\ge 3$, and~\cite[Theorem~1.7]{FMSS24} together with
+Theorem~\ref{thm:lower} shows that the largest piercing number of a family of polytopes in $\R^3$ with packing number at
+most $7$ is $3$. It is
+also open whether $A(d)-\log_2 d$ is bounded.
+\end{remark}
+
+\section*{Acknowledgements and funding}
+This work was done by AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo}
+and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents
+record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and
+audit each other's work. For more on the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math
+Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Data availability}
+No data were generated or analysed in this work.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+This paper is part of a research project on AI proving problems. Codex agents (OpenAI) produced the constructions and
+proofs, and Claude agents (Anthropic) checked the proofs and the references and wrote the manuscript. The question is
+due to McGinnis and Zerbib~\cite{MZ24}, and its planar case was settled by Zerbib~\cite{Zer24}. The proofs rest on
+Dol'nikov's transversal theorem~\cite{Dol92}, the Borsuk--Ulam theorem~\cite{Bor33} and the device of convex hulls of large
+subsets from Frick, Murray, Simon and Stemmler~\cite{FMSS24}. The author directed the work and is responsible for the content of the paper and for decisions
+concerning its dissemination.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.5\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
+\toprule
+Symbol or term & Meaning & First appears \\
+\midrule
+$(p,q)$ property & among any $p$ members some $q$ have a common point & abstract, page~\pageref{abs:start} \\
+$\F$ & a finite family of nonempty compact convex sets in $\R^d$ & Section~\ref{sec:intro} \\
+$\nu(\F)$ & packing number: the largest number of pairwise disjoint members of $\F$ & Section~\ref{sec:intro} \\
+$\tau(\F)$ & the least number of hyperplanes whose union meets every member of $\F$ & Section~\ref{sec:intro} \\
+$T(d,n)$ & the largest $\tau(\F)$ over families in $\R^d$ with $\nu(\F)\le n$ & Section~\ref{sec:intro} \\
+$A(d)$ & $\sup_{n\ge1}\bigl(T(d,n)-n/d\bigr)$ & Theorem~\ref{thm:loss} \\
+$\ell$ & $\ceil{\log_2 d}$ & Theorem~\ref{thm:loss} \\
+$j$ & $\ceil{\log_2(8\ell+16)}$ & Theorem~\ref{thm:loss} \\
+list & a finite family of nonempty compact convex sets, possibly empty & Section~\ref{sec:cuts} \\
+capacity & an integer $b$ with $\nu(\G)\le b$ for the list $\G$ & Section~\ref{sec:cuts} \\
+$H$ processes $\G$ & every member of the list $\G$ missing $H$ goes to exactly one of two lists; members meeting $H$ are discarded & Section~\ref{sec:cuts} \\
+operation & one application of Lemma~\ref{lem:simul} to one list & Section~\ref{sec:schedule} \\
+perfect, truncated tree & all operations that halve a list of capacity $2^k-1$ down to capacity $0$, or down to capacity $1$ & Section~\ref{sec:schedule} \\
+ready & a node whose parent has been performed & Section~\ref{sec:schedule} \\
+$\gamma$ & the moment curve $\lambda\mapsto(\lambda,\lambda^2,\dots,\lambda^d)$ & Section~\ref{sec:lower} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The table lists the symbols and terms used in more than one section. Letters introduced inside a single proof or
+construction or remark, such as $a$, $c$, $h$, $k$, $m$, $r$, $t$, $s$, $u$, $B$, $C$, $\hat C$, $E$, $L$, $M$, $N$, $P$,
+$Q$, $R$, $W$, $\alpha_i$, $\beta_i$, $\mu_i$ and the lists $\mathcal K_i$, are defined where they appear and are local to it.
+
+\begin{thebibliography}{99}
+\bibitem{AK95} N.~Alon and G.~Kalai, \emph{Bounding the piercing number}, Discrete Comput. Geom. \textbf{13} (1995),
+no.~3--4, 245--256, \doi{10.1007/BF02574042}.
+\bibitem{Bor33} K.~Borsuk, \emph{Drei S\"atze \"uber die $n$-dimensionale euklidische Sph\"are}, Fund. Math.
+\textbf{20} (1933), 177--190, \doi{10.4064/fm-20-1-177-190}.
+\bibitem{Dol92} V.~L.~Dol'nikov, \emph{A generalization of the ham sandwich theorem}, Math. Notes \textbf{52} (1992),
+no.~2, 771--779, \doi{10.1007/BF01236771}.
+\bibitem{FMSS24} F.~Frick, S.~Murray, S.~Simon and L.~Stemmler, \emph{Transversal generalizations of hyperplane
+equipartitions}, Int. Math. Res. Not. IMRN \textbf{2024} (2024), no.~7, 5586--5618, \doi{10.1093/imrn/rnad216};
+\arxiv{2210.15423}, whose numbering is used here.
+\bibitem{Gal59} T.~Gallai, \emph{\"Uber extreme Punkt- und Kantenmengen}, Ann. Univ. Sci. Budapest. E\"otv\"os Sect.
+Math. \textbf{2} (1959), 133--138, Zbl 0094.36105.
+\bibitem{McG24} D.~McGinnis, \emph{Piercing families of convex sets in the plane that avoid a certain subfamily with
+lines}, Comput. Geom. \textbf{120} (2024), 102087, \doi{10.1016/j.comgeo.2024.102087}.
+\bibitem{MZ24} D.~McGinnis and S.~Zerbib, \emph{Using the KKM theorem}, preprint, 2024, \arxiv{2408.03921}.
+\bibitem{Zer24} S.~Zerbib, \emph{Bounds on piercing and line-piercing numbers in families of convex sets in the
+plane}, Discrete Math. \textbf{347} (2024), no.~3, 113787, \doi{10.1016/j.disc.2023.113787}; \arxiv{2303.16240}, whose numbering is used here.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public/tree/5427734deee9be643d6dfbdd5e7d4baeeefe4a4a}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical
+research}, 2026, \doi{10.5281/zenodo.24150837},
+\url{https://github.com/yspennstate/math-brain-public/tree/5427734deee9be643d6dfbdd5e7d4baeeefe4a4a/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public/tree/46b935d26d5a2893f7790b60466387dd8da47ef5}.
+\end{thebibliography}
+
+\end{document}
